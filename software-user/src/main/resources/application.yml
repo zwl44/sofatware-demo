@@ -1,0 +1,20 @@
+server:
+  port: 8092
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://admin:root@eureka:7001/eureka
+  instance:
+    instance-id: software-springcloud-user
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 2 # 设置心跳的时间间隔（默认是30秒）
+    lease-expiration-duration-in-seconds: 5  # 如果现在超过了5秒的间隔（默认是90秒）
+spring:
+  application:
+    name: software-springcloud-user
+  thymeleaf:
+    prefix: classpath:/templates/ # 访问template下的html文件需要配置模板，映射，路径指向
+    suffix: .html
+    cache: false #
+

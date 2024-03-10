@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.mapper.UserInformationMapper">
+    <resultMap id="BaseResultMap" type="com.cn.po.UserInformation">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="pass_word" jdbcType="VARCHAR" property="passWord"/>
+        <result column="token_id" jdbcType="INTEGER" property="tokenId"/>
+    </resultMap>
+
+    <select id="selectById" resultType="com.cn.po.UserInformationAndToken" parameterType="long">
+        select
+            a.id,
+            a.name,
+            a.pass_word,
+            a.token_id,
+            b.token,
+            b.limits_authority
+        from
+            user_information a inner  join token_information b on a.token_id = b.id
+        WHERE a.id = #{id};
+    </select>
+
+    <select id="selectList" resultType="com.cn.po.UserInformationAndToken">
+        select
+            a.id,
+            a.name,
+            a.pass_word,
+            a.token_id,
+            b.token,
+            b.limits_authority
+        from
+            user_information a inner  join token_information b on a.token_id = b.id
+    </select>
+
+    <insert id="insert" parameterType="com.cn.po.UserInformation">
+        INSERT INTO
+            user_information(
+            name,
+            pass_word,
+            token_id
+            )
+        VALUES
+            (
+              #{name},
+              #{passWord},
+              #{tokenId}
+            );
+    </insert>
+</mapper>

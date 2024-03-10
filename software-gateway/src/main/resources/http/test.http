@@ -1,0 +1,46 @@
+### 根据id获取
+POST http://localhost:7573/product/getInfoById
+Content-Type: Application/Json
+
+{
+  "id": "1"
+}
+
+### 获取全部
+POST http://localhost:7573/product/getAllInfo
+Content-Type: Application/Json
+Authorization: 1
+
+{
+}
+
+### 添加信息
+POST http://localhost:7573/product/addInfo
+Content-Type: Application/Json
+Authorization: 2
+
+{
+  "productName": "shell",
+  "productDesc": "变成信息"
+}
+
+### 修改信息
+POST http://localhost:7573/product/updateInfo
+Content-Type: Application/Json
+Authorization: 1
+
+{
+  "id": 10,
+  "productName": "shell",
+  "productDesc": "变成息"
+}
+
+### 删除信息
+POST http://localhost:7573/product/deleteInfo
+Content-Type: Application/Json
+Authorization: 2
+
+{
+  "id": 10
+
+}

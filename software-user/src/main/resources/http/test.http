@@ -1,0 +1,31 @@
+### 获取全部信息
+POST http://localhost:8092/user/getAllInfo
+Content-Type: Application/Json
+
+{
+}
+
+###
+POST http://localhost:8092/user/getInfoById
+Content-Type: Application/Json
+
+{
+  "id": 1
+}
+
+### 获取全部信息
+POST http://localhost:8093/user/getAllInfo
+Content-Type: Application/Json
+
+{
+}
+
+### 获取全部信息
+POST http://localhost:8090/user/addInfo
+Content-Type: Application/Json
+
+{
+  "name": "3234",
+  "passWord": "434",
+  "tokenId": "2"
+}

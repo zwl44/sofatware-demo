@@ -1,0 +1,28 @@
+server:
+  port: 8090
+mybatis:
+  mapper-locations: # 所有的mapper映射文件
+    - classpath:mapping/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+spring:
+  application:
+    name: software-springcloud-mysql
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource # 配置当前要使用的数据源的操作类型
+    driver-class-name: com.mysql.jdbc.Driver # 配置MySQL的驱动程序类
+    url: jdbc:mysql://localhost:3306/springcloud?serverTimezone=GMT%2B8 # 数据库连接地址
+    username: root
+    password: 123123
+logging:
+  level:
+    com.en.mapper: debug
+eureka:
+  client: # 客户端进行Eureka注册的配置
+    service-url:
+      defaultZone: http://admin:root@eureka:7001/eureka
+  instance:
+    instance-id: software-springcloud-mysql
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 2 # 设置心跳的时间间隔（默认是30秒）
+    lease-expiration-duration-in-seconds: 5  # 如果现在超过了5秒的间隔（默认是90秒）

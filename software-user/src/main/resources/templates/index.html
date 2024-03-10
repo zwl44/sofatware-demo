@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页</title>
+    <script src="https://cdn.staticfile.org/jquery/1.11.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+<form id="login-form">
+    <label for="username">用户名：</label>
+    <input type="text" name="name" id="username">
+
+    <label for="password">密码：</label>
+    <input type="password" name="passWord" id="password">
+    <br>
+    <label for="option1">普通用户</label>
+    <input type="radio" id="option1" name="tokenId" value="1"><br><br>
+
+    <label for="option2">EDITOR</label>
+    <input type="radio" id="option2" name="tokenId" value="2"><br><br>
+
+    <label for="option3">PRODUCT_ADMIN</label>
+    <input type="radio" id="option3" name="tokenId" value="3"><br><br>
+</form>
+
+<div id="error-message"></div>
+<button type="submit" onclick="loginViaFormData()">登录</button>
+
+<script>
+    function loginViaFormData() {
+        var a = $("#login-form").serializeArray();
+        var formDataObject = {};
+
+        // 将数组转换为对象
+        $.each(a, function (index, item) {
+            formDataObject[item.name] = item.value;
+        });
+        console.log(formDataObject);
+        $.ajax(
+            {
+                type: "post",
+                url: "http://localhost:8090/user/addInfo",
+                data: JSON.stringify(formDataObject), // 序列化form表单里面的数据传到后台
+                contentType: 'application/json;charset=UTF-8',
+                success: function (result) {
+                    console.log(result)
+                    if (!result) {
+                        alert("用户名或密码错误");
+                    } else {
+                        alert("登录成功");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // 处理错误
+                    console.error(error);
+                }
+
+            }
+        )
+    }
+</script>
+
+</body>
+</html>

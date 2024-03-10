@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.mapper.TokenInformationMapper">
+    <resultMap id="BaseResultMap" type="com.cn.po.UserInformation">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="pass_word" jdbcType="VARCHAR" property="passWord"/>
+        <result column="token_id" jdbcType="INTEGER" property="tokenId"/>
+    </resultMap>
+
+    <select id="selectById" resultType="com.cn.po.TokenInformation" parameterType="String">
+        select
+            id,
+            token,
+            limits_authority
+        from
+            token_information
+        WHERE token = #{token};
+    </select>
+
+    <select id="selectList" resultType="com.cn.po.TokenInformation">
+        select
+           id,
+            token,
+            limits_authority
+        from
+             token_information
+    </select>
+
+    <insert id="insert" parameterType="com.cn.po.TokenInformation">
+        INSERT INTO
+            token_information(
+            id,
+            token,
+            limits_authority
+            )
+        VALUES
+            (
+              #{id },
+              #{token},
+              #{limits_authority}
+            );
+    </insert>
+</mapper>

@@ -1,0 +1,27 @@
+server:
+  port: 7573
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://admin:root@eureka:7001/eureka
+  instance:
+    instance-id: software-springcloud-gateway
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 2 # 设置心跳的时间间隔（默认是30秒）
+    lease-expiration-duration-in-seconds: 5  # 如果现在超过了5秒的间隔（默认是90秒）
+spring:
+  application:
+    name: software-springcloud-gateway
+  cloud:
+    gateway:
+      #这里可以配置多个路由
+      routes:
+        - id: USER #路由的id
+          uri: http://localhost:8092 #匹配后提供服务的路由地址
+          predicates:
+            - Path=/user/** #断言 路径相匹配的进行路由
+        - id: PRODUCT #路由的id
+          uri: http://localhost:8091 #匹配后提供服务的路由地址
+          predicates:
+            - Path=/product/** #断言 路径相匹配的进行路由
